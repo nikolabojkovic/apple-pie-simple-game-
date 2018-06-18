@@ -12,6 +12,9 @@
 		048652F220D5AD5E000681EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048652F020D5AD5E000681EA /* Main.storyboard */; };
 		048652F420D5AD63000681EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048652F320D5AD63000681EA /* Assets.xcassets */; };
 		048652F720D5AD63000681EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048652F520D5AD63000681EA /* LaunchScreen.storyboard */; };
+		048652FF20D5BC2F000681EA /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048652FE20D5BC2F000681EA /* Game.swift */; };
+		0486530120D708E6000681EA /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486530020D708E6000681EA /* Round.swift */; };
+		0486530320D71067000681EA /* StateEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486530220D71067000681EA /* StateEnum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		048652F320D5AD63000681EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		048652F620D5AD63000681EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		048652F820D5AD63000681EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		048652FE20D5BC2F000681EA /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		0486530020D708E6000681EA /* Round.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Round.swift; sourceTree = "<group>"; };
+		0486530220D71067000681EA /* StateEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateEnum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +62,9 @@
 			children = (
 				048652EC20D5AD5E000681EA /* AppDelegate.swift */,
 				048652EE20D5AD5E000681EA /* ViewController.swift */,
+				0486530220D71067000681EA /* StateEnum.swift */,
+				048652FE20D5BC2F000681EA /* Game.swift */,
+				0486530020D708E6000681EA /* Round.swift */,
 				048652F020D5AD5E000681EA /* Main.storyboard */,
 				048652F320D5AD63000681EA /* Assets.xcassets */,
 				048652F520D5AD63000681EA /* LaunchScreen.storyboard */,
@@ -136,6 +145,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				048652EF20D5AD5E000681EA /* ViewController.swift in Sources */,
+				048652FF20D5BC2F000681EA /* Game.swift in Sources */,
+				0486530320D71067000681EA /* StateEnum.swift in Sources */,
+				0486530120D708E6000681EA /* Round.swift in Sources */,
 				048652ED20D5AD5E000681EA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,7 +302,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "nikolabojkovic.com.example.Apple-Pie";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -308,7 +320,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "nikolabojkovic.com.example.Apple-Pie";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

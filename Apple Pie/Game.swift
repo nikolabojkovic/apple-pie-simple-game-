@@ -8,16 +8,18 @@
 
 import Foundation
 
-struct Game {
+class Game {
+    var currentPlayer: Player
+    var players: [Player] = []
+    
     let incorenctMovesAllowed: Int
     private var _state: State
     var listOfWords: [String]
     
     var currentRound: Round!
-    var score: Int
     var wins: Int {
         didSet {
-            score += 1
+            currentPlayer.score += 1
         }
     }
     var losses: Int
@@ -30,23 +32,24 @@ struct Game {
         _state = State.new
         incorenctMovesAllowed = 7
         listOfWords = ["apple", "bannana", "orange"]
-        score = 0
         wins = 0
         losses = 0
+        players.append(Player(name: "Single player"))
+        currentPlayer = players[0]
         self.newRound()
     }
     
-    mutating func newRound() {
+    func playerGuessed(letter: Character) {
+        currentPlayer.score += currentRound.playerGuessed(letter: letter) ? 1 : 0
+        updateState()
+    }
+        
+    private func newRound() {
         currentRound = Round(word: listOfWords.removeFirst(),
                              incorrectMovesRemaining: incorenctMovesAllowed)
     }
     
-    mutating func playerGuessed(letter: Character) {
-        score += currentRound.playerGuessed(letter: letter) ? 1 : 0
-        updateState()
-    }
-    
-    private mutating func updateState() {
+    private func updateState() {
          if listOfWords.isEmpty && currentRound.isLost{
             losses += 1
             _state = State.finished

@@ -1,4 +1,4 @@
-//
+
 //  ViewController.swift
 //  Apple Pie
 //
@@ -34,10 +34,20 @@ class ViewController: UIViewController {
         updateUI()
     }
     
+    @IBAction func newMultiplayserGame(_ sender: UIButton) {
+        game = MultiplayerGame()
+        updateUI()
+    }
+    
     func updateUI() {
         updateImage()
         updateLetterButtons(gameState: game.state, roundState: game.currentRound.state)
-        updateLabels()
+        
+        if game.players.count >= 2 {
+            updateLabelsForMultiplePlayer()
+        } else {
+            updateLabels()
+        }
     }
     
     func updateImage() {
@@ -61,7 +71,28 @@ class ViewController: UIViewController {
                                  letters = game.currentRound.guessedFormattedWord.map { String($0) }
         correctWorrdLabel.text = letters.joined(separator: " ")
         
-               scoreLabel.text = "Wins: \(game.wins), Losses: \(game.losses), Score: \(game.score)"
+               scoreLabel.text = "Wins: \(game.wins), Losses: \(game.losses), Score: \(game.currentPlayer.score)"
+    }
+    
+    func updateLabelsForMultiplePlayer() {
+                             var letters = [String]()
+                                 letters = game.currentRound.guessedFormattedWord.map { String($0) }
+        correctWorrdLabel.text = letters.joined(separator: " ")
+        
+        if game.state == State.finished {
+            let playerWithMaxScore = game.players.max { (p1, p2) -> Bool in
+                p1.score < p2.score
+            }
+            
+            scoreLabel.text = game.players.filter( { $0.score == playerWithMaxScore!.score }).count == game.players.count ? " Tie " : "\(playerWithMaxScore!.name)" + " won!"
+            return
+        }
+        
+        scoreLabel.text = (game.players[0] !== game.currentPlayer ? "(Your turn) " : "") +
+                          "\(game.players[0].name): \(game.players[0].score) points" +
+                          "    |    " +
+                          (game.players[1] !== game.currentPlayer ? "(Your turn) " : "") +
+                          "\(game.players[1].name): \(game.players[1].score) points"
     }
     
     override func didReceiveMemoryWarning() {

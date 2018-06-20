@@ -27,6 +27,14 @@ class MultiplayerGame: Game {
         }
     }
     
+    override func playerGuessed(word: String) {
+        let currentScore = currentPlayer.score
+        super.playerGuessed(word: word)
+        if currentScore == currentPlayer.score {
+            switchToTheNextPlayer()
+        }
+    }
+    
     private func switchToTheNextPlayer() {
         playersWaitingToPlay.append(currentPlayer)
         currentPlayer = playersWaitingToPlay.removeFirst()

@@ -31,7 +31,7 @@ class Game {
     init() {
         _state = State.new
         incorenctMovesAllowed = 7
-        listOfWords = ["apple", "bannana", "orange"]
+        listOfWords = ["applẼ", "bannana", "orange"]
         wins = 0
         losses = 0
         players.append(Player(name: "Single player"))
@@ -41,6 +41,12 @@ class Game {
     
     func playerGuessed(letter: Character) {
         currentPlayer.score += currentRound.playerGuessed(letter: letter) ? 1 : 0
+        updateState()
+    }
+    
+    func playerGuessed(word: String) {
+        currentPlayer.score += currentRound.playerGuessed(word: word)
+            ? Set(currentRound.word).count + 3 : 0
         updateState()
     }
         
@@ -75,5 +81,13 @@ class Game {
         }
        
         _state = State.inProgress
+    }
+    
+    // undo
+    
+    var states = [Game]()
+    
+    func undo() {
+        
     }
 }

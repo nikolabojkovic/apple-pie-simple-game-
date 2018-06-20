@@ -20,12 +20,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var correctWorrdLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet var letterButtons: [UIButton]!
+    @IBOutlet weak var fullTextGuess: UITextField!
     
     var game: Game!
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         sender.isEnabled = false
         game.playerGuessed(letter: Character(sender.title(for: .normal)!.lowercased()))
+        updateUI()
+    }
+    
+    @IBAction func buttonGuessFullWordPressed(_ sender: UIButton) {
+        game.playerGuessed(word: fullTextGuess.text!)
         updateUI()
     }
     
@@ -88,10 +94,10 @@ class ViewController: UIViewController {
             return
         }
         
-        scoreLabel.text = (game.players[0] !== game.currentPlayer ? "(Your turn) " : "") +
+        scoreLabel.text = (game.players[0] === game.currentPlayer ? "(Your turn) " : "") +
                           "\(game.players[0].name): \(game.players[0].score) points" +
                           "    |    " +
-                          (game.players[1] !== game.currentPlayer ? "(Your turn) " : "") +
+                          (game.players[1] === game.currentPlayer ? "(Your turn) " : "") +
                           "\(game.players[1].name): \(game.players[1].score) points"
     }
     

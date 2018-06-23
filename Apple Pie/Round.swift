@@ -10,10 +10,19 @@ import Foundation
 
 struct Round {
     private var _state: State = State.new
-    private var guessedLetters: [Character] = []
+    private var _guessedLetters: [Character] = []
+    private var _guessedWords: [String] = []
     var word: String
     let allLetters = ["e": ["e" ,"Ẽ", "Ẽ"]]
     var incorrectMovesRemaining: Int
+    
+    var guessedLetters: [Character] {
+        get { return _guessedLetters }
+    }
+    
+    var guessedWords: [String] {
+        get { return _guessedWords }
+    }
     
     var state: State {
         get { return _state }
@@ -24,18 +33,33 @@ struct Round {
         self.incorrectMovesRemaining = incorrectMovesRemaining
     }
     
+    init(state: State,
+         guessedLetters: [Character],
+         guessedWords: [String],
+         word: String,
+         incorrectMovesRemaining: Int) {
+        self._state = state
+        self._guessedLetters = guessedLetters
+        self._guessedWords = guessedWords
+        self.word = word
+        self.incorrectMovesRemaining = incorrectMovesRemaining
+    }
+    
     mutating func playerGuessed(letter: Character) -> Bool {
         var isGuessed = false
         
         if let group = allLetters[String(letter)] {
             for item in group {
-                isGuessed = word.contains(item)
-                guessedLetters.append(Character(item))
+                if word.contains(item) {
+                    isGuessed = true
+                    _guessedLetters.append(Character(item))
+                }
             }
         } else {
-            // if special letters are not mapped, check for regular guessed letter only
+            // if special letters are not mapped, check for regular guessed letter only,
+            // not needed if all letter are mapped to their groups
             isGuessed = word.contains(letter)
-            guessedLetters.append(letter)
+            _guessedLetters.append(letter)
         }
         
         if  !isGuessed {
@@ -52,8 +76,10 @@ struct Round {
         if  !isGuessed {
             incorrectMovesRemaining -= 1
         } else {
-            guessedLetters.append(contentsOf: word)
+            _guessedLetters.append(contentsOf: word)
         }
+        
+        _guessedWords.append(word)
         
         updateState()
         return isGuessed
@@ -76,6 +102,6 @@ struct Round {
     }
     
     var guessedFormattedWord: String {
-        return word.map { letter in guessedLetters.contains(letter) ? "\(letter)" : "_" }.joined()
+        return word.map { letter in _guessedLetters.contains(letter) ? "\(letter)" : "_" }.joined()
     }
 }

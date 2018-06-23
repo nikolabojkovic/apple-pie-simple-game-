@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        game = Game()
+        create(Game())
         updateUI()
     }
     
@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet var letterButtons: [UIButton]!
     @IBOutlet weak var fullTextGuess: UITextField!
+    @IBOutlet weak var undoButton: UIButton!
     
     var game: Game!
     
@@ -36,12 +37,26 @@ class ViewController: UIViewController {
     }
     
     @IBAction func newGame(_ sender: UIButton) {
-        game = Game()
+        create(Game())
         updateUI()
     }
     
     @IBAction func newMultiplayserGame(_ sender: UIButton) {
-        game = MultiplayerGame()
+        create(MultiplayerGame())
+        updateUI()
+    }
+    
+    @IBAction func undo(_ sender: UIButton) {
+        undo()
+    }
+    
+    func create(_ game: Game) {
+        self.game = game
+        self.game.start()
+    }
+    
+    func undo() {
+        game = game.undo()
         updateUI()
     }
     
@@ -53,6 +68,11 @@ class ViewController: UIViewController {
             updateLabelsForMultiplePlayer()
         } else {
             updateLabels()
+        }
+        
+        undoButton.isEnabled = game.state != State.new
+        if let lastWord = game.currentRound.guessedWords.last {
+            fullTextGuess.text = lastWord
         }
     }
     
@@ -69,6 +89,10 @@ class ViewController: UIViewController {
         if roundState == State.new || gameState == State.new {
             letterButtons.forEach { button in button.isEnabled = true }
             return;
+        }
+        
+        if gameState == State.inProgress {
+          letterButtons.forEach { button in button.isEnabled = !game.currentRound.guessedLetters.contains((Character)(button.title(for: .normal)!.lowercased())) }
         }
     }
     
@@ -94,10 +118,10 @@ class ViewController: UIViewController {
             return
         }
         
-        scoreLabel.text = (game.players[0] === game.currentPlayer ? "(Your turn) " : "") +
+        scoreLabel.text = (game.players[0].name == game.currentPlayer.name ? "(Your turn) " : "") +
                           "\(game.players[0].name): \(game.players[0].score) points" +
                           "    |    " +
-                          (game.players[1] === game.currentPlayer ? "(Your turn) " : "") +
+                          (game.players[1].name == game.currentPlayer.name ? "(Your turn) " : "") +
                           "\(game.players[1].name): \(game.players[1].score) points"
     }
     

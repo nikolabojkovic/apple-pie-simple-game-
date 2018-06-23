@@ -15,4 +15,9 @@ class Player {
     init(name: String) {
         self.name = name
     }
+    
+    init(score: Int, name: String) {
+        self.score = score
+        self.name = name
+    }
 }

@@ -61,7 +61,7 @@ class Game {
     }
     
     func start() {
-//        saveState()
+
     }
     
     func playerGuessed(letter: Character) {
@@ -108,16 +108,11 @@ class Game {
         }
        
         _state = State.inProgress
-        //saveState()
     }
     
     // undo
     
     var _states = [Game]()
-    
-    var undoAvailable: Bool {
-        get { return _states.count > 0 }
-    }
     
     internal func saveState() {
         _states.append(Game(

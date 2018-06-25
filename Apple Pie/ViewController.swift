@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        create(Game())
+        create(SinglePlayerGame())
         updateUI()
     }
     
@@ -37,7 +37,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func newGame(_ sender: UIButton) {
-        create(Game())
+        create(SinglePlayerGame())
         updateUI()
     }
     
@@ -64,7 +64,7 @@ class ViewController: UIViewController {
         updateImage()
         updateLetterButtons(gameState: game.state, roundState: game.currentRound.state)
         
-        if game.players.count >= 2 {
+        if (game as? MultiplayerGame) != nil {
             updateLabelsForMultiplePlayer()
         } else {
             updateLabels()

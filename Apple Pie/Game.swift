@@ -8,13 +8,14 @@
 
 import Foundation
 
-class Game {
+class Game: Undoable {
+    var _states: [Game]
+    var _state: State
     
     let incorenctMovesAllowed: Int
-    var _state: State
     var listOfWords: [String]
     
-    var currentPlayer: Player
+    var currentPlayer: Player!
     var players: [Player]
     
     var currentRound: Round!
@@ -23,24 +24,25 @@ class Game {
             currentPlayer.score += 1
         }
     }
+    
     var losses: Int
     
     var state: State {
         get { return _state }
     }
     
-    init() {
+    internal init() {
         _state = State.new
+        _states = [Game]()
         incorenctMovesAllowed = 7
         listOfWords = ["applẼ", "bannana", "orange"]
         wins = 0
         losses = 0
-        players = [Player(name: "Single player")]
-        currentPlayer = players[0]
+        players = [Player]()
         self.newRound()
     }
     
-    init(state: State,
+    internal init(state: State,
          states: [Game]!,
          incorenctMovesAllowed: Int,
          listOfWords: [String],
@@ -110,33 +112,8 @@ class Game {
         _state = State.inProgress
     }
     
-    // undo
-    
-    var _states = [Game]()
-    
-    internal func saveState() {
-        _states.append(Game(
-            state: self._state,
-            states: self._states,
-            incorenctMovesAllowed: self.incorenctMovesAllowed,
-            listOfWords: [String](self.listOfWords),
-            players: [Player](self.players.map { player in Player(score: player.score, name: player.name) }),
-            currentPlayer: Player(score: self.currentPlayer.score, name: self.currentPlayer.name),
-            currentRound: Round(state: self.currentRound.state,
-                                guessedLetters: [Character](self.currentRound.guessedLetters),
-                                guessedWords: [String](self.currentRound.guessedWords),
-                                word: String(self.currentRound.word),
-                                incorrectMovesRemaining: self.currentRound.incorrectMovesRemaining),
-            wins: self.wins,
-            losses: self.losses
-        ))
+    func saveState() {
+        
     }
     
-    func undo() -> Game {
-        return _states.removeLast()
-    }
-    
-    func redu() -> Game {
-        return Game()
-    }
 }

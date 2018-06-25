@@ -17,6 +17,8 @@
 		0486530320D71067000681EA /* StateEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486530220D71067000681EA /* StateEnum.swift */; };
 		0486530520D849B2000681EA /* MultiplayerGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486530420D849B2000681EA /* MultiplayerGame.swift */; };
 		0486530720D9772D000681EA /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486530620D9772D000681EA /* Player.swift */; };
+		04ECECCC20E1876C00F31084 /* Undoable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ECECCB20E1876C00F31084 /* Undoable.swift */; };
+		04ECECCE20E1880A00F31084 /* SignlePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ECECCD20E1880A00F31084 /* SignlePlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		0486530220D71067000681EA /* StateEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateEnum.swift; sourceTree = "<group>"; };
 		0486530420D849B2000681EA /* MultiplayerGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerGame.swift; sourceTree = "<group>"; };
 		0486530620D9772D000681EA /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		04ECECCB20E1876C00F31084 /* Undoable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Undoable.swift; sourceTree = "<group>"; };
+		04ECECCD20E1880A00F31084 /* SignlePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignlePlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +72,8 @@
 				048652EE20D5AD5E000681EA /* ViewController.swift */,
 				0486530220D71067000681EA /* StateEnum.swift */,
 				048652FE20D5BC2F000681EA /* Game.swift */,
+				04ECECCD20E1880A00F31084 /* SignlePlayer.swift */,
+				04ECECCB20E1876C00F31084 /* Undoable.swift */,
 				0486530420D849B2000681EA /* MultiplayerGame.swift */,
 				0486530620D9772D000681EA /* Player.swift */,
 				0486530020D708E6000681EA /* Round.swift */,
@@ -151,8 +157,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0486530520D849B2000681EA /* MultiplayerGame.swift in Sources */,
+				04ECECCE20E1880A00F31084 /* SignlePlayer.swift in Sources */,
 				048652EF20D5AD5E000681EA /* ViewController.swift in Sources */,
 				048652FF20D5BC2F000681EA /* Game.swift in Sources */,
+				04ECECCC20E1876C00F31084 /* Undoable.swift in Sources */,
 				0486530320D71067000681EA /* StateEnum.swift in Sources */,
 				0486530720D9772D000681EA /* Player.swift in Sources */,
 				0486530120D708E6000681EA /* Round.swift in Sources */,
